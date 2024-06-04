@@ -58,25 +58,46 @@ ll
 ./startup.sh    - start tomcat
 machineIP:8080/ # to check web UI
 
+#each time you can not go to tomcat directory to start and shut down the app, so here will create a link files to up/down the app
+
+
+
 # u r not supposed to login into manager-app, so we have to change context.xml file and then we can able to login.
 
--------------NEXT STEP---------------------------
+                 -------------NEXT STEP---------------------------
 # give permission to user to login from outside
 find / -name context.xml    # checking where is context.xml file, once you get, update-manager & host-manager file only,. rest docs and example can leave.
 
 vi /opt/tomcat/webapps/host-manager/META-INF/context.xml  - open this file and comment value section it by using, <!-- to initial line &, --> to closing line
 vi /opt/tomcat/webapps/manager/META-INF/context.xml   -- open this file and comment value section it by using, <!-- to initial line &, --> to closing line
-./startup.sh --- start the tomcat and this time you are able to login manager-app
-./shutdown.sh   -- stop the tomcat.
-----------------NEXT STEP --------------------------
+ 
+                 ----------------NEXT STEP --------------------------
 
 --- to create user and password to login in manager app-
 cd ..     -change present directory to tomcat directory
 cd conf/
+ll
+vi tomcat-users.xml
+  
+         # and update/add roles-
 
+<role rolename="manager-gui"/>
+ <role rolename="manager-script"/>
+ <role rolename="manager-jmx"/>
+ <role rolename="manager-status"/>
+ <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+ <user username="deployer" password="deployer" roles="manager-script"/>
+ <user username="tomcat" password="s3cret" roles="manager-gui"/>
 
+# creating link file to start and shutdown tomcat
 
-
+ln -s /opt/tomcat/bin/startup.sh /usr/local/bin/tomcatup
+ln -s /opt/tomcat/bin/startup.sh /usr/local/bin/tomcatdown
+     -----------------NEXT STEP----------------
+    # Integrate Tomcat with Jenkins
+    # deploy to container- plugin
+ # go to credential- cfreate a secrete for deployer-role( username- deployer & password-deployer), check in your role section(2nd role)
+ # create a job - for deploy to tomcat container
 
 
 
