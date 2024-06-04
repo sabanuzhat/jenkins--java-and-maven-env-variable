@@ -1,3 +1,25 @@
 yum install docker -y
 service docker start
 service docker enable
+docker ps    # to check running containers
+docker ps -a  # to check all containers
+docker images  # to check present images
+-------NEXT STEP- CREATE A TOMCAT CONTAINER---------
+docker pull tomcat:latest   # pull images of tomcat from docker hub
+docker run -d --name tomcat-container -p 8081:8080 tomcat      #create a container
+ip:8081  # to browse your container
+    ---# you are now able to see tomcat but status is 404 error, lets fix this issue.
+        (this error is due to all contents bydefault went in webapps-dist, so lets copy all content from webapp-dist into webapp.
+
+docker exec -it tomcat-container /bin/bash        #login your container
+ls   # check content in your container
+cd webapps.dist  # go to this directory and copy all content into webapp
+ls
+cp -R * ../webapps/  #copied into webapp.
+
+  #now check your tomcat is avaiable on your browser.
+
+
+
+
+
