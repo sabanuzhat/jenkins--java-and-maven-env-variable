@@ -98,6 +98,7 @@ ln -s /opt/tomcat/bin/startup.sh /usr/local/bin/tomcatdown
     # deploy to container- plugin
  # go to credential- cfreate a secrete for deployer-role( username- deployer & password-deployer), check in your role section(2nd role)
  # create a job - for deploy to tomcat container
+ #job -git-clean install- postbuild(deploy to container)- add tomcat-apply & save.
 
 
 
