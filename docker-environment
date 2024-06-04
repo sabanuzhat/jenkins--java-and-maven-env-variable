@@ -18,6 +18,8 @@ ls
 cp -R * ../webapps/  #copied into webapp.
 
   #now check your tomcat is avaiable on your browser.
+  # but this temporary solution, means if you stops this container and create another container with the same image, again the same issue will appear.
+  # so we have to fix this for permanently( by using docker file)
 
 
 
