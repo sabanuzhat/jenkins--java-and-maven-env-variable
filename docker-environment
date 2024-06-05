@@ -20,8 +20,18 @@ cp -R * ../webapps/  #copied into webapp.
   #now check your tomcat is avaiable on your browser.
   # but this temporary solution, means if you stops this container and create another container with the same image, again the same issue will appear.
   # so we have to fix this for permanently( by using docker file)
+ vi Dockerfile    # dockerfile
+   -- FROM tomcat:latest
+   -- RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+docker bild -t demotomcat
+docker images
+docker run -d --name demotomcat-container -p 8085:8080 demotomcat
 
-
+--------------------next step- -----------
+# integrating with jenkins 
+#create a dockeradmin user & place this uder in docker group, 
+#publish over SSH- plugin required
+#add dockerhost to jenkins "configure systems"
 
 
 
