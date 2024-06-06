@@ -32,6 +32,58 @@ docker run -d --name demotomcat-container -p 8085:8080 demotomcat
 #create a dockeradmin user & place this uder in docker group, 
 #publish over SSH- plugin required
 #add dockerhost to jenkins "configure systems"
+-------adding a user= dockeradmin 
+cat /etc/passwd   # to check current user
+cat /etc/group    # to cjeck grou
+
+adduser dockeradmin  #user add
+passwd dockeradmin   # password
+usermod -aG docker dockeradmin   # adding dockeradmin to docker group
+# now try to login the machine through new user(dockeradmin), you are not allowd to login bcz it is desable passwd based authentication- have to enable it first
+vi /etc/ssh/sshd_config
+service sshd reload
+
+# download plugin- publish over ssh
+#configure jenkins -manage- system-ssh server-add- host& IP, passwd and save it.
+# create a job-copy from previous job- post build option- send atrifacts over ssh- and add path.
+# login as dockeradmin and go to home directory to check artifact.
+
+----------update dockerfile to automate deployment process-----
+# we create a seprate directory to store our artifact 
+in root directory-
+cd /opt/
+mkdir docker   #directory to store artifact
+ll
+# this docker folder have only root permission, will have to allow dockeradmin permission also
+chown -R dockeradmin:dockeradmin docker
+ll # to check permission
+now to store artifact on this docker directory, will change dockerfile
+cd
+mv Dockerfile /opt/docker/
+# now to to dockerfile and give permission to dockeradmin
+chown -R dockeradmin:dockeradmin /opt/docker
+ll # check permission now
+
+# now go to jenkins job past path to send artifact in thos docker folder
+vi Dockerfile 
+//opt//docker  #update this in remote directory command section
+
+docker build -t tomcat:v2
+docker build -t tomcat:v2 .
+docker images
+docker run -d --name tomcatv2 -p 8082:8080 tomcat:v2
+
+# now build the job and check
+#ip:8082/webapp
+# but we are doing this manullay means, by docker command we are creating images and building container etc, so have to do this process automatically-
+-----------next step- automate this deployment-----------
+
+
+
+
+
+
+
 
 
 
