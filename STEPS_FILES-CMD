@@ -9,7 +9,7 @@ find / -name java-11*   or find / -name jvm      # to find path of JAVA
 MAVEN---------------------------------------------------------------
 # to install MAVEN-
 cd /opt
-wget wget https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.tar.gz  # downloading maven
+wget https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.tar.gz  # downloading maven
 tar -xvzf apache-maven-3.9.7-bin.tar.gz    # extracting maven
 mv apache-maven-3.9.7 maven                # renameing apachemaven into maven
 cd maven/  (ll)                            # go to maven folder
@@ -45,7 +45,7 @@ TOMCAT------------------------------------------------------------------
 amazon-linux-extras install java-openjdk11 -y   -install java
 java -version
 cd /opt/                                         - go to opt folder
-wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.89/bin/apache-tomcat-9.0.89.tar.gz        -download tomcat
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz      -download tomcat
 ls
 tar -xvzf apache-tomcat-9.0.89.tar.gz - extract tomcat 
 ls
