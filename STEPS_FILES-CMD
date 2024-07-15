@@ -20,11 +20,11 @@ ENV-VARIABLE-------------------------------------------------------
 # set Env- variable-
 cd (make root)
 vi .bash_profile
-     set-   
-               M2_HOME=/opt/maven
-               M2=/opt/maven/bin
-               JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.23.0.9-2.amzn2.0.1.x86_64
-   and         PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+  
+M2_HOME=/opt/maven
+M2=/opt/maven/bin
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.23.0.9-2.amzn2.0.1.x86_64
+PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
 
 source .bash_profile  # to make this changes configured
 mvn -v (now it will show outside also)
