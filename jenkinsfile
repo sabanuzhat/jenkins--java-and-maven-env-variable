@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    environment {
+        JAVA_HOME = tool 'java'
+        MAVEN_HOME = tool 'maven'
+        SONAR_SCANNER_HOME = tool 'sonar'
+        PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${SONAR_SCANNER_HOME}/bin:${env.PATH}"
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'master', url: 'https://github.com/letslearn800/hello-world.git'
+            }
+        }
+
+        stage('Build with Maven') {
+            steps {
+                sh 'mvn clean install -f webapp/pom.xml'
+            }
+        }
+
+        stage('SonarQube Scan') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    withCredentials([string(credentialsId: 'sonar_cred', variable: 'SONAR_TOKEN')]) {
+                        sh '''
+                            mvn -f webapp/pom.xml sonar:sonar \
+                              -Dsonar.projectKey=hello-world \
+                              -Dsonar.host.url=http://13.234.20.158:9000/ \
+                              -Dsonar.login=$SONAR_TOKEN
+                        '''
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
