@@ -45,7 +45,7 @@ TOMCAT------------------------------------------------------------------
 amazon-linux-extras install java-openjdk11 -y   -install java
 java -version
 cd /opt/                                         - go to opt folder
-wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz      -download tomcat
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.107/bin/apache-tomcat-9.0.107.tar.gz      -download tomcat
 ls
 tar -xvzf apache-tomcat-9.0.89.tar.gz - extract tomcat 
 ls
